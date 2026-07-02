@@ -34,7 +34,7 @@ This concept gives them a fast, mobile-first, branded landing page that funnels 
 
 Fully static, no build step, no framework. Just `index.html` + `styles.css` + `script.js` +
 `assets/`. Responsive and mobile-first, accessible (semantic landmarks, alt text, focus states,
-`prefers-reduced-motion`), with tasteful motion (sticky/shrinking header, scroll reveals, marquee).
+`prefers-reduced-motion`), with tasteful motion (sticky/shrinking header, scroll reveals).
 
 Fonts load from a single Google Fonts `<link>`; everything else is self-contained.
 

@@ -167,18 +167,6 @@ img { display: block; max-width: 100%; }
   background: repeating-linear-gradient(90deg, var(--red) 0 26px, var(--cream) 26px 52px, var(--navy-2) 52px 78px);
 }
 
-/* ---------- Marquee ---------- */
-.marquee { background: var(--red); color: var(--cream); overflow: hidden; padding: .85rem 0; border-bottom: 4px solid var(--navy-deep); }
-.marquee-track {
-  display: inline-flex; align-items: center; gap: 1.5rem; white-space: nowrap;
-  font-family: var(--font-display); text-transform: uppercase; letter-spacing: 3px; font-size: 1.05rem;
-  animation: marquee 26s linear infinite;
-  will-change: transform;
-}
-.marquee-track .dot { color: rgba(255,255,255,.6); font-size: .7rem; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
-
 /* ---------- Sections ---------- */
 .section { padding: clamp(3.8rem, 8vw, 6.5rem) 0; }
 .section-head { max-width: 640px; margin-bottom: 3rem; }
