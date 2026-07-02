@@ -42,6 +42,19 @@ Fonts load from a single Google Fonts `<link>`; everything else is self-containe
 
 Open `index.html` by double-clicking it, or serve the folder with any static server.
 
+## SEO / deploy note
+
+On-page SEO is wired in: unique `<title>` + meta description, JSON-LD structured data
+(`@type: BarberShop`) with the shop's real name, phone, address, hours, price range and
+`sameAs` links (Booksy + Facebook), complete Open Graph + Twitter Card tags, a `<link rel="canonical">`,
+`robots.txt`, and `sitemap.xml`.
+
+**Base URL is a placeholder.** The canonical link, `og:url`, `og:image`/`twitter:image`, the JSON-LD
+`url`/`image`, `robots.txt`, and `sitemap.xml` all use the literal placeholder
+`https://REPLACE-WITH-DOMAIN.com/`. Before deploying, do a one-line find-replace of
+`https://REPLACE-WITH-DOMAIN.com/` with the site's real domain across `index.html`, `robots.txt`,
+and `sitemap.xml`.
+
 ## Design direction
 
 Classic heritage barbershop: barber-pole palette (navy + barber red + cream/bone), condensed
