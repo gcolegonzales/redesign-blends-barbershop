@@ -51,8 +51,8 @@ On-page SEO is wired in: unique `<title>` + meta description, JSON-LD structured
 
 **Base URL is a placeholder.** The canonical link, `og:url`, `og:image`/`twitter:image`, the JSON-LD
 `url`/`image`, `robots.txt`, and `sitemap.xml` all use the literal placeholder
-`https://REPLACE-WITH-DOMAIN.com/`. Before deploying, do a one-line find-replace of
-`https://REPLACE-WITH-DOMAIN.com/` with the site's real domain across `index.html`, `robots.txt`,
+`https://blendsbarbershop.com/`. Before deploying, do a one-line find-replace of
+`https://blendsbarbershop.com/` with the site's real domain across `index.html`, `robots.txt`,
 and `sitemap.xml`.
 
 ## Design direction
