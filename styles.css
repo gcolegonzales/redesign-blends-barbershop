@@ -311,7 +311,7 @@ img { display: block; max-width: 100%; }
 .footer-nav a { font-family: var(--font-cond); text-transform: uppercase; letter-spacing: 1.5px; font-size: .9rem; color: var(--bone); text-decoration: none; transition: color .2s; }
 .footer-nav a:hover { color: var(--red); }
 .footer-fine { font-size: .82rem; color: #6b7488; margin: 0; line-height: 1.6; }
-.concept-note { color: #4e576b; }
+.concept-note { color: #9aa3b6; }
 
 /* ---------- Mobile book bar ---------- */
 .mobile-book-bar { display: none; }
