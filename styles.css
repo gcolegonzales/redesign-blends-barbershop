@@ -35,6 +35,8 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
 }
 
+html, body { overflow-x: clip; max-width: 100%; }
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -42,7 +44,7 @@ body {
   background: var(--paper);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .wrap { width: min(var(--wrap), 92vw); margin-inline: auto; }
@@ -129,7 +131,8 @@ img { display: block; max-width: 100%; }
 
 .nav-toggle { display: none; }
 
-/* mobile nav */
+/* mobile nav (side drawer) */
+.nav-scrim { display: none; }
 .mobile-nav { display: none; }
 
 /* ---------- Hero ---------- */
@@ -328,17 +331,56 @@ img { display: block; max-width: 100%; }
   .nav-toggle {
     display: inline-flex; flex-direction: column; gap: 5px; margin-left: auto;
     background: none; border: 0; padding: 8px; cursor: pointer;
+    position: relative; z-index: 130;
+    -webkit-tap-highlight-color: transparent; user-select: none;
   }
-  .nav-toggle span { width: 26px; height: 2px; background: var(--cream); transition: transform .3s var(--ease), opacity .3s var(--ease); }
+  .nav-toggle span { width: 26px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s var(--ease); }
   .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .mobile-nav { display: block; background: var(--navy-deep); border-top: 1px solid rgba(244,237,225,.1); padding: 1rem 4vw 1.5rem; }
-  .mobile-nav[hidden] { display: none; }
-  .mobile-nav ul { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .3rem; }
-  .mobile-nav a { display: block; padding: .8rem .4rem; color: var(--cream); text-decoration: none; font-family: var(--font-cond); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(244,237,225,.08); }
-  .mobile-nav .btn-book { width: 100%; }
+  /* scrim behind drawer */
+  .nav-scrim {
+    display: block; position: fixed; inset: 0; z-index: 110;
+    background: rgba(7, 16, 31, .55); backdrop-filter: blur(2px);
+    opacity: 0; visibility: hidden; transition: opacity .3s var(--ease), visibility .3s var(--ease);
+    -webkit-tap-highlight-color: transparent; user-select: none;
+  }
+  .nav-scrim.open { opacity: 1; visibility: visible; }
+
+  /* side-opening drawer */
+  .mobile-nav {
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 120;
+    width: min(82vw, 340px); max-width: 100%;
+    background: var(--navy-deep);
+    border-left: 3px solid var(--red);
+    box-shadow: -18px 0 40px -18px rgba(0,0,0,.7);
+    padding: 5.2rem 1.6rem 2rem;
+    transform: translateX(105%);
+    transition: transform .34s var(--ease);
+    overflow-y: auto;
+    -webkit-tap-highlight-color: transparent; user-select: none;
+  }
+  .mobile-nav[hidden] { display: flex; }
+  .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav ul { list-style: none; margin: 0 0 1.3rem; padding: 0; display: grid; gap: .3rem; }
+  .mobile-nav a { display: block; padding: .95rem .6rem .95rem .2rem; color: var(--cream); text-decoration: none; font-family: var(--font-cond); text-transform: uppercase; letter-spacing: 2px; font-size: 1.15rem; border-bottom: 1px solid rgba(244,237,225,.1); }
+  .mobile-nav a:active { color: #ff8091; }
+  .mobile-nav .btn-book { width: 100%; margin-top: auto; }
+
+  /* in-drawer close (X) button */
+  .nav-close {
+    position: absolute; top: 1rem; right: 1rem; z-index: 5;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(244,237,225,.08); border: 1px solid rgba(244,237,225,.18);
+    color: var(--cream); cursor: pointer; font-size: 1.4rem; line-height: 1;
+    -webkit-tap-highlight-color: transparent; user-select: none;
+    transition: background .2s var(--ease), transform .2s var(--ease);
+  }
+  .nav-close:hover { background: rgba(200,16,46,.4); }
+  .nav-close:active { transform: scale(.92); }
 
   .visit-grid { grid-template-columns: 1fr; gap: 2rem; }
   .hours td { text-align: right; }

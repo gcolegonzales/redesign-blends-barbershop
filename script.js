@@ -22,23 +22,40 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Mobile nav toggle
+  // Mobile nav toggle (side drawer)
   var toggle = document.getElementById("navToggle");
   var mobileNav = document.getElementById("mobileNav");
+  var scrim = document.getElementById("navScrim");
+  var navClose = document.getElementById("navClose");
+
+  // Relocate drawer + scrim out of the header (whose backdrop-filter would
+  // otherwise become the containing block for these position:fixed elements
+  // and collapse them to the header's box). Make them direct children of body.
+  if (mobileNav) { mobileNav.hidden = false; document.body.appendChild(mobileNav); }
+  if (scrim) { scrim.hidden = false; document.body.appendChild(scrim); }
+
+  function openNav() {
+    if (!toggle || !mobileNav) return;
+    toggle.setAttribute("aria-expanded", "true");
+    mobileNav.classList.add("open");
+    if (scrim) scrim.classList.add("open");
+  }
   function closeNav() {
     if (!toggle || !mobileNav) return;
     toggle.setAttribute("aria-expanded", "false");
-    mobileNav.hidden = true;
+    mobileNav.classList.remove("open");
+    if (scrim) scrim.classList.remove("open");
   }
   if (toggle && mobileNav) {
     toggle.addEventListener("click", function () {
       var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      mobileNav.hidden = open;
+      if (open) closeNav(); else openNav();
     });
     mobileNav.addEventListener("click", function (e) {
       if (e.target.closest("a")) closeNav();
     });
+    if (navClose) navClose.addEventListener("click", closeNav);
+    if (scrim) scrim.addEventListener("click", closeNav);
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
     });
